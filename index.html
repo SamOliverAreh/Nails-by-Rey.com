@@ -258,6 +258,89 @@
   .admin-add-btn { padding: 0.6rem 1.2rem; background: var(--rose-dark); color: white; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; cursor: pointer; white-space: nowrap; }
   .admin-export-btn { margin-left: 1rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); padding: 0.4rem 1rem; border-radius: 2rem; color: rgba(255,255,255,0.8); font-size: 0.75rem; cursor: pointer; font-family: 'DM Sans', sans-serif; }
 
+  /* ── REFINED ADMIN GATE (PASSWORD) ── */
+  .admin-gate {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    max-width: 460px;
+    margin: 2rem auto;
+    text-align: center;
+    backdrop-filter: blur(12px);
+  }
+  .admin-gate h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: white; margin-bottom: 0.5rem; }
+  .admin-gate p { color: rgba(255,255,255,0.45); font-size: 0.85rem; margin-bottom: 1.8rem; }
+  .admin-gate .pw-row { display: flex; gap: 0.5rem; justify-content: center; align-items: center; }
+  .admin-gate input {
+    padding: 0.75rem 1.2rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    width: 220px;
+    letter-spacing: 0.1em;
+  }
+  .admin-gate input:focus { border-color: var(--rose); }
+  .admin-gate button {
+    padding: 0.75rem 1.8rem;
+    background: var(--rose-dark);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .admin-gate button:hover { background: var(--rose-deep); }
+  .gate-error { color: #f5a0a0; font-size: 0.82rem; margin-top: 0.8rem; display: none; }
+
+  /* ── REFINED GALLERY UPLOAD ZONE ── */
+  .gallery-upload-zone {
+    border: 2px dashed rgba(255,255,255,0.25);
+    border-radius: 24px;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 1.5rem;
+    background: rgba(255,255,255,0.02);
+  }
+  .gallery-upload-zone:hover, .gallery-upload-zone.dragover {
+    border-color: var(--rose);
+    background: rgba(255,255,255,0.04);
+  }
+  .gallery-upload-zone input[type=file] { display: none; }
+  .upload-icon { font-size: 3rem; margin-bottom: 0.8rem; opacity: 0.8; }
+  .upload-label { font-size: 1rem; color: rgba(255,255,255,0.65); font-weight: 400; }
+  .upload-label span { color: var(--rose); text-decoration: underline; cursor: pointer; font-weight: 500; }
+  .upload-meta {
+    display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: center;
+    background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .upload-meta input, .upload-meta select {
+    padding: 0.65rem 1rem; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; color: white; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none; flex: 1; min-width: 140px;
+  }
+  .upload-meta input::placeholder { color: rgba(255,255,255,0.3); }
+  .upload-meta select option { background: #2a1f1f; }
+  .upload-preview { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid var(--rose); display: none; }
+  .gallery-mgr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+  .gallery-mgr-item { position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 1; background: rgba(255,255,255,0.05); }
+  .gallery-mgr-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-mgr-info { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); padding: 0.4rem 0.6rem; }
+  .gallery-mgr-name { font-size: 0.72rem; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .gallery-mgr-tag { font-size: 0.65rem; color: var(--rose); }
+  .gallery-mgr-del { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 50%; background: rgba(180,50,50,0.85); color: white; border: none; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
+  .gallery-mgr-item:hover .gallery-mgr-del { opacity: 1; }
+  .gallery-mgr-empty { color: rgba(255,255,255,0.3); font-size: 0.88rem; text-align: center; padding: 2rem; }
+
   /* FOOTER */
   footer { background: var(--rose-dark); color: rgba(255,255,255,0.7); text-align: center; padding: 2rem; font-size: 0.82rem; }
   footer a { color: var(--rose); text-decoration: none; }
@@ -320,7 +403,7 @@
   <span style="color:rgba(255,255,255,0.4);font-size:0.78rem;">📍 Kajang (Homebased)</span>
 </div>
 
-<!-- GALLERY (tabs instead of filters) -->
+<!-- GALLERY -->
 <section id="gallery">
   <div class="container">
     <div class="section-header">
@@ -348,7 +431,6 @@
       <p class="section-desc reveal reveal-delay-2">Transparent pricing for every service. All sets include nail prep, cuticle care & aftercare advice.</p>
     </div>
     <div class="pricing-grid">
-      <!-- ... same pricing cards ... -->
       <div class="pricing-card reveal reveal-delay-1">
         <div class="pricing-icon">💅</div>
         <div class="pricing-name">Manicure</div>
@@ -459,7 +541,6 @@
       </div>
       <div class="reveal reveal-right">
         <div class="booking-form" id="bookingForm">
-          <!-- ... same form fields ... -->
           <div class="form-row">
             <div class="form-group">
               <label>First Name</label>
@@ -542,13 +623,13 @@
     <!-- LOGIN GATE -->
     <div id="adminGate" class="admin-gate">
       <h3>🔐 Admin Access</h3>
-      <p>Enter the admin password to manage bookings, gallery and discounts.</p>
-      <div>
+      <p>Enter the password to manage bookings, gallery and discounts.</p>
+      <div class="pw-row">
         <input type="password" id="adminPwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdminPw()">
         <button onclick="checkAdminPw()">Enter</button>
       </div>
       <div class="gate-error" id="gateError">Incorrect password. Try again.</div>
-      <p style="margin-top:1.2rem;font-size:0.75rem;color:rgba(255,255,255,0.25);">Default password: <code style="color:var(--rose)">nailsbyrey2025</code> — change before publishing.</p>
+      <p style="margin-top:1.5rem;font-size:0.75rem;color:rgba(255,255,255,0.25);">Default: <code style="color:var(--rose)">nailsbyrey2025</code> — change before publishing.</p>
     </div>
 
     <!-- DASHBOARD (hidden until logged in) -->
@@ -556,7 +637,7 @@
       <div style="display:flex;justify-content:flex-end;margin-bottom:1rem;">
         <button class="admin-action" onclick="logoutAdmin()">Log out</button>
       </div>
-      <div class="admin-stats" id="adminStats">
+      <div class="admin-stats">
         <div class="admin-stat"><div class="admin-stat-val" id="stat-total">0</div><div class="admin-stat-label">Total Bookings</div></div>
         <div class="admin-stat"><div class="admin-stat-val" id="stat-confirmed">0</div><div class="admin-stat-label">Confirmed</div></div>
         <div class="admin-stat"><div class="admin-stat-val" id="stat-pending">0</div><div class="admin-stat-label">Pending</div></div>
@@ -599,17 +680,16 @@
         </table>
       </div>
 
-      <!-- GALLERY MANAGER TAB (same as before) -->
+      <!-- GALLERY MANAGER TAB -->
       <div class="admin-panel" id="tab-gallery-mgr">
-        <!-- ... upload zone, meta, manager grid ... (unchanged) ... -->
         <div class="gallery-upload-zone" id="uploadZone" onclick="document.getElementById('photoInput').click()" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event)">
           <input type="file" id="photoInput" accept="image/*" multiple onchange="handleFileSelect(this.files)">
           <div class="upload-icon">📷</div>
           <div class="upload-label">Drag & drop photos here or <span>browse files</span></div>
-          <div style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.4rem;">JPG, PNG, WEBP · Multiple files supported</div>
+          <div style="margin-top:0.6rem; font-size:0.8rem; color:rgba(255,255,255,0.4);">JPG, PNG, WEBP · Multiple files supported</div>
         </div>
         <div class="upload-meta" id="uploadMeta" style="display:none;">
-          <img id="uploadPreview" class="upload-preview">
+          <img id="uploadPreview" class="upload-preview" alt="Preview">
           <input type="text" id="photoTitle" placeholder="Title e.g. Cherry Blossom Set">
           <select id="photoTag">
             <option value="nail-art">Nail Art</option>
@@ -618,8 +698,8 @@
             <option value="ombre">Ombré</option>
             <option value="acrylic">Acrylic</option>
           </select>
-          <button class="admin-add-btn" onclick="savePhoto()">Upload to Gallery</button>
-          <button class="admin-action" onclick="cancelUpload()" style="padding:0.6rem 1rem;">Cancel</button>
+          <button class="admin-add-btn" onclick="savePhoto()" style="padding:0.7rem 1.5rem;">Upload</button>
+          <button class="admin-action" onclick="cancelUpload()" style="padding:0.7rem 1.2rem;">Cancel</button>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
           <div style="font-size:0.8rem;color:rgba(255,255,255,0.4);" id="galleryMgrCount"></div>
@@ -628,7 +708,7 @@
         <div class="gallery-mgr-grid" id="galleryMgrGrid"></div>
       </div>
 
-      <!-- DISCOUNTS ADMIN TAB (same as before) -->
+      <!-- DISCOUNTS ADMIN TAB -->
       <div class="admin-panel" id="tab-discounts-admin">
         <div class="discount-form">
           <input type="text" placeholder="Code e.g. BDAY20" id="dc-code">
@@ -931,7 +1011,7 @@ function validateDiscountCode(code, phone, email) {
   return { valid: true };
 }
 
-// ─── ADMIN STATS (now 5 cards) ────────────────────────────
+// ─── ADMIN STATS ───────────────────────────────────────────
 function updateAdminStats() {
   document.getElementById('stat-total').textContent = bookings.length;
   document.getElementById('stat-confirmed').textContent = bookings.filter(b => b.status === 'confirmed').length;
