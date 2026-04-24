@@ -52,6 +52,23 @@
     background: rgba(253,246,240,0.97);
   }
 
+  /* NAV active state (for scrollspy) */
+  .nav-links a { position: relative; }
+  .nav-links a.active {
+    color: var(--rose-dark) !important;
+    font-weight: 500;
+  }
+  .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--rose-dark);
+    transition: width 0.2s;
+  }
+
   /* ── SMOOTH PARALLAX HERO ── */
   .hero-content { transition: transform 0.1s linear; }
 
@@ -1018,6 +1035,45 @@ function showToast(msg) {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2800);
 }
+
+// ══════════════════════════════════════════════════════════
+// ★ NEW: SCROLL REVEAL OBSERVER & SCROLLSPY ★
+// ══════════════════════════════════════════════════════════
+(function() {
+  // ── Scroll Reveal ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // ── Scrollspy (active nav link) ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a:not(.nav-book)');
+  function onScroll() {
+    let current = '';
+    const scrollY = window.pageYOffset;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // initial call
+})();
 
 // ─── INIT ──────────────────────────────────────────────────
 renderGallery();
