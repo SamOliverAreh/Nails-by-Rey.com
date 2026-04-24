@@ -348,6 +348,7 @@
       <p class="section-desc reveal reveal-delay-2">Transparent pricing for every service. All sets include nail prep, cuticle care & aftercare advice.</p>
     </div>
     <div class="pricing-grid">
+      <!-- ... same pricing cards ... -->
       <div class="pricing-card reveal reveal-delay-1">
         <div class="pricing-icon">💅</div>
         <div class="pricing-name">Manicure</div>
@@ -458,6 +459,7 @@
       </div>
       <div class="reveal reveal-right">
         <div class="booking-form" id="bookingForm">
+          <!-- ... same form fields ... -->
           <div class="form-row">
             <div class="form-group">
               <label>First Name</label>
@@ -554,11 +556,10 @@
       <div style="display:flex;justify-content:flex-end;margin-bottom:1rem;">
         <button class="admin-action" onclick="logoutAdmin()">Log out</button>
       </div>
-      <div class="admin-stats">
+      <div class="admin-stats" id="adminStats">
         <div class="admin-stat"><div class="admin-stat-val" id="stat-total">0</div><div class="admin-stat-label">Total Bookings</div></div>
         <div class="admin-stat"><div class="admin-stat-val" id="stat-confirmed">0</div><div class="admin-stat-label">Confirmed</div></div>
         <div class="admin-stat"><div class="admin-stat-val" id="stat-pending">0</div><div class="admin-stat-label">Pending</div></div>
-        <div class="admin-stat"><div class="admin-stat-val" id="stat-completed">0</div><div class="admin-stat-label">Completed</div></div>
         <div class="admin-stat"><div class="admin-stat-val" id="stat-revenue">RM 0</div><div class="admin-stat-label">Est. Revenue</div></div>
         <div class="admin-stat"><div class="admin-stat-val" id="stat-photos">0</div><div class="admin-stat-label">Gallery Photos</div></div>
       </div>
@@ -575,7 +576,7 @@
           <div class="admin-search" style="margin-bottom:0; flex:1;">
             <input type="text" placeholder="Search by name, service, date..." oninput="searchBookings(this.value)" id="bookingSearch">
           </div>
-          <button class="admin-export-btn" onclick="exportCSV()">📥 Export CSV</button>
+          <button class="admin-export-btn" onclick="exportBookingsCSV()">📥 Export CSV</button>
         </div>
         <table class="admin-table" id="bookingsTable">
           <thead><tr>
@@ -587,6 +588,9 @@
 
       <!-- CUSTOMERS TAB -->
       <div class="admin-panel" id="tab-customers">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:1rem;">
+          <button class="admin-export-btn" onclick="exportCustomersCSV()">📥 Export CSV</button>
+        </div>
         <table class="admin-table">
           <thead><tr>
             <th>Name</th><th>Phone</th><th>Email</th><th>Visits</th><th>Last Service</th><th>Total Spent</th>
@@ -595,8 +599,9 @@
         </table>
       </div>
 
-      <!-- GALLERY MANAGER TAB -->
+      <!-- GALLERY MANAGER TAB (same as before) -->
       <div class="admin-panel" id="tab-gallery-mgr">
+        <!-- ... upload zone, meta, manager grid ... (unchanged) ... -->
         <div class="gallery-upload-zone" id="uploadZone" onclick="document.getElementById('photoInput').click()" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event)">
           <input type="file" id="photoInput" accept="image/*" multiple onchange="handleFileSelect(this.files)">
           <div class="upload-icon">📷</div>
@@ -623,7 +628,7 @@
         <div class="gallery-mgr-grid" id="galleryMgrGrid"></div>
       </div>
 
-      <!-- DISCOUNTS ADMIN TAB -->
+      <!-- DISCOUNTS ADMIN TAB (same as before) -->
       <div class="admin-panel" id="tab-discounts-admin">
         <div class="discount-form">
           <input type="text" placeholder="Code e.g. BDAY20" id="dc-code">
@@ -666,7 +671,7 @@ let discountsData = [
 ];
 
 const ADMIN_PASSWORD = 'nailsbyrey2025';
-const ADMIN_WA = '60176445338'; // Rey's WhatsApp for admin notification
+const ADMIN_WA = '60176445338'; // Your WhatsApp for notifications
 
 // ─── ADMIN LOGIN ───────────────────────────────────────────
 function checkAdminPw() {
@@ -741,7 +746,6 @@ function renderGallery(tag = currentGalleryTag) {
   `).join('');
 }
 
-// Tab switching for gallery
 document.getElementById('galleryTabs').addEventListener('click', (e) => {
   const tab = e.target.closest('.gallery-tab');
   if (!tab) return;
@@ -908,7 +912,7 @@ function submitBooking() {
   renderBookingsTable();
   renderCustomersTable();
 
-  // Notify admin via WhatsApp automatically
+  // Notify admin via WhatsApp
   const adminMsg = encodeURIComponent(`🔔 New Booking Request\n\n${fname} ${newBooking.lname}\n${service}\n${bdate} at ${newBooking.time}\nPhone: ${phone}\nCode: ${code || 'none'}\nNotes: ${newBooking.notes || 'none'}`);
   window.open(`https://wa.me/${ADMIN_WA}?text=${adminMsg}`, '_blank');
 }
@@ -916,35 +920,24 @@ function submitBooking() {
 function validateDiscountCode(code, phone, email) {
   const normPhone = phone.replace(/\D/g, '');
   const normEmail = email.toLowerCase();
-  // New client check
   if (code === 'NEWCLIENT10') {
-    const exists = bookings.some(b => {
-      const bPhone = (b.phone || '').replace(/\D/g, '');
-      const bEmail = (b.email || '').toLowerCase();
-      return (bPhone === normPhone && normPhone !== '') || (bEmail === normEmail && normEmail !== '');
-    });
+    const exists = bookings.some(b => (b.phone || '').replace(/\D/g, '') === normPhone || (b.email || '').toLowerCase() === normEmail);
     if (exists) return { valid: false, msg: 'This code is for new clients only. You already have a previous booking.' };
   }
-  // Loyalty check
   if (code === 'LOYAL30') {
-    const count = bookings.filter(b => {
-      const bPhone = (b.phone || '').replace(/\D/g, '');
-      return bPhone === normPhone && (b.status === 'confirmed' || b.status === 'completed');
-    }).length;
+    const count = bookings.filter(b => (b.phone || '').replace(/\D/g, '') === normPhone && (b.status === 'confirmed' || b.status === 'completed')).length;
     if (count < 5) return { valid: false, msg: 'You need at least 5 previous visits to use the loyalty code.' };
   }
-  // BDAY15 and REFER20 are always allowed (manual verification)
   return { valid: true };
 }
 
-// ─── ADMIN STATS ───────────────────────────────────────────
+// ─── ADMIN STATS (now 5 cards) ────────────────────────────
 function updateAdminStats() {
   document.getElementById('stat-total').textContent = bookings.length;
   document.getElementById('stat-confirmed').textContent = bookings.filter(b => b.status === 'confirmed').length;
   document.getElementById('stat-pending').textContent = bookings.filter(b => b.status === 'pending').length;
-  document.getElementById('stat-completed').textContent = bookings.filter(b => b.status === 'completed').length;
   const rev = bookings.filter(b => b.status === 'completed' && b.finalPrice)
-    .reduce((acc, b) => acc + parseFloat(b.finalPrice), 0);
+    .reduce((acc, b) => acc + b.finalPrice, 0);
   document.getElementById('stat-revenue').textContent = 'RM ' + rev.toFixed(0);
 }
 
@@ -1017,19 +1010,39 @@ function notifyWA(id) {
 
 function searchBookings(val) { renderBookingsTable(val); }
 
-function exportCSV() {
+function exportBookingsCSV() {
   const headers = ['ID','First','Last','Phone','Email','Service','Date','Time','Notes','Discount','Status','Final Service','Final Price'];
   const rows = bookings.map(b => [
     b.id, b.fname, b.lname, b.phone, b.email, b.service, b.date, b.time,
     b.notes, b.code, b.status, b.finalService || '', b.finalPrice || ''
   ]);
   const csvContent = [headers, ...rows].map(row => row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+  downloadCSV(csvContent, 'nailsbyrey_bookings.csv');
+  showToast('Bookings CSV exported ✦');
+}
+
+function exportCustomersCSV() {
+  const map = {};
+  bookings.forEach(b => {
+    const key = b.phone;
+    if (!map[key]) map[key] = { name: `${b.fname} ${b.lname}`, phone: b.phone, email: b.email, visits: 0, last: '', spent: 0 };
+    map[key].visits++;
+    if (!map[key].last || b.date > map[key].last) map[key].last = b.service.split(' —')[0];
+    if (b.status === 'completed' && b.finalPrice) map[key].spent += b.finalPrice;
+  });
+  const headers = ['Name','Phone','Email','Visits','Last Service','Total Spent (RM)'];
+  const rows = Object.values(map).map(c => [c.name, c.phone, c.email, c.visits, c.last, c.spent.toFixed(0)]);
+  const csvContent = [headers, ...rows].map(row => row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  downloadCSV(csvContent, 'nailsbyrey_customers.csv');
+  showToast('Customers CSV exported ✦');
+}
+
+function downloadCSV(content, filename) {
+  const blob = new Blob(['\uFEFF' + content], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'nailsbyrey_bookings.csv'; a.click();
+  a.href = url; a.download = filename; a.click();
   URL.revokeObjectURL(url);
-  showToast('CSV exported ✦');
 }
 
 // ─── CUSTOMERS TABLE ───────────────────────────────────────
