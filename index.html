@@ -331,6 +331,29 @@
   .gallery-mgr-item:hover .gallery-mgr-del { opacity: 1; }
   .gallery-mgr-empty { color: rgba(255,255,255,0.3); font-size: 0.88rem; text-align: center; padding: 2rem; }
 
+  /* MULTI-SELECT DROPDOWN */
+  .multi-select-wrap { position: relative; }
+  .multi-select-display {
+    width: 100%; padding: 0.65rem 0.9rem; border: 1px solid var(--card-border);
+    border-radius: 8px; font-size: 0.9rem; background: var(--white); color: var(--ink);
+    font-family: 'DM Sans', sans-serif; cursor: pointer; user-select: none;
+    transition: border-color 0.2s;
+  }
+  .multi-select-display:hover { border-color: var(--rose-deep); }
+  .multi-select-options {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+    background: var(--white); border: 1px solid var(--card-border); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(42,31,31,0.12); z-index: 50; padding: 0.4rem 0;
+    max-height: 220px; overflow-y: auto;
+  }
+  .multi-select-options.open { display: block; }
+  .multi-option {
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 1rem;
+    font-size: 0.88rem; color: var(--ink); cursor: pointer; transition: background 0.15s;
+  }
+  .multi-option:hover { background: var(--blush); }
+  .multi-option input[type=checkbox] { accent-color: var(--rose-dark); width: 15px; height: 15px; cursor: pointer; }
+
   footer { background: var(--rose-dark); color: rgba(255,255,255,0.7); text-align: center; padding: 2rem; font-size: 0.82rem; }
   footer a { color: var(--rose); text-decoration: none; }
 
@@ -364,7 +387,7 @@
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#booking">Book</a></li>
-    <li><a href="#admin">Admin</a></li>
+    <li id="adminNavItem" style="display:none;"><a href="#admin">Admin</a></li>
     <li><a href="#booking" class="nav-book">Book Now</a></li>
   </ul>
 </nav>
@@ -375,9 +398,9 @@
     <div class="hero-badge reveal">✦ Professional Nail Artist · Kajang, Selangor</div>
     <h1 class="reveal reveal-delay-1">Nails<br><em>by Rey</em></h1>
     <p class="hero-sub reveal reveal-delay-2">Artisan nail care by Vive Reytchel — where every set is a tiny masterpiece crafted just for you.</p>
-    <div class="reveal reveal-delay-3">
-      <a href="#booking" class="btn btn-primary">Book a Session</a>
-      <a href="#gallery" class="btn btn-outline">View Gallery</a>
+    <div class="reveal reveal-delay-3" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;">
+      <a href="#booking" class="btn btn-primary" style="width:220px;text-align:center;">Book a Session</a>
+      <a href="#gallery" class="btn btn-outline" style="width:220px;text-align:center;margin-left:0;">View Gallery</a>
     </div>
   </div>
 </section>
@@ -524,15 +547,21 @@
             <div class="phone-wrap"><span class="phone-prefix">+60</span><input type="tel" id="phone" placeholder="12-345 6789"></div>
           </div>
           <div class="form-group">
-            <label>Service</label>
-            <div class="checkbox-group" id="serviceCheckboxes">
-              <label><input type="checkbox" value="3D arts"> 3D arts</label>
-              <label><input type="checkbox" value="Cat eye"> Cat eye</label>
-              <label><input type="checkbox" value="French tips"> French tips</label>
-              <label><input type="checkbox" value="Gel"> Gel</label>
-              <label><input type="checkbox" value="Gel removal"> Gel removal</label>
-              <label><input type="checkbox" value="Manicure"> Manicure</label>
-              <label><input type="checkbox" value="Ombre"> Ombre</label>
+            <label>Service <span style="font-size:0.7rem;color:var(--rose-deep);text-transform:none;letter-spacing:0;">(select all that apply)</span></label>
+            <div class="multi-select-wrap" id="serviceDropWrap">
+              <div class="multi-select-display" id="serviceDisplay" onclick="toggleServiceDrop()">
+                <span id="serviceDisplayText" style="color:var(--muted);">Select service(s)...</span>
+                <span style="float:right;color:var(--muted);">▾</span>
+              </div>
+              <div class="multi-select-options" id="serviceOptions">
+                <label class="multi-option"><input type="checkbox" value="3D arts"> 3D arts</label>
+                <label class="multi-option"><input type="checkbox" value="Cat eye"> Cat eye</label>
+                <label class="multi-option"><input type="checkbox" value="French tips"> French tips</label>
+                <label class="multi-option"><input type="checkbox" value="Gel"> Gel</label>
+                <label class="multi-option"><input type="checkbox" value="Gel removal"> Gel removal</label>
+                <label class="multi-option"><input type="checkbox" value="Manicure"> Manicure</label>
+                <label class="multi-option"><input type="checkbox" value="Ombre"> Ombre</label>
+              </div>
             </div>
           </div>
           <div class="form-row">
@@ -545,15 +574,18 @@
         <div class="booking-success" id="bookingSuccess">
           <div class="check">🌸</div><h4>Booking Request Sent!</h4>
           <p id="successMsg">Rey will confirm your slot shortly via WhatsApp. Can't wait to see you!</p>
-          <div style="margin-top:1.2rem;"><a href="https://wa.me/60176445338" target="_blank" class="btn btn-primary" style="font-size:0.82rem;">Message on WhatsApp</a></div>
+          <div style="margin-top:1.2rem;display:flex;flex-direction:column;align-items:center;gap:0.8rem;">
+            <a href="https://wa.me/60176445338" target="_blank" class="btn btn-primary" style="font-size:0.82rem;width:220px;text-align:center;">Message on WhatsApp</a>
+            <button onclick="resetBookingForm()" class="btn btn-outline" style="font-size:0.82rem;width:220px;text-align:center;margin-left:0;">Book Another Appointment</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ADMIN PANEL -->
-<section id="admin">
+<!-- ADMIN PANEL — hidden from public, revealed via ?admin or #admin-access -->
+<section id="admin" style="display:none;">
   <div class="container">
     <div class="section-header" style="text-align:left;">
       <div class="section-label">Management</div>
@@ -643,7 +675,7 @@
 
 <script>
 // CONFIG
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDOiG8EsjuT5MkiFSTCofN74jVIAzvbb-8yqX77F-saAqTEI-6mybdiQGHiRHedQ-C/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbypOt0N-RCiBowshVcdTUte-Dmn-_Iizbf5nt0ciKiozLT7e-gGFmG4iCXgNTGW4ils/exec';
 const API_KEY = 'AIzaSyCSof22kUg19D6wdd0PYXmUPkA71x-sFhU';
 const SPREADSHEET_ID = '1nbQzt6TzZ4fi0mt1_v4sAsOO9ZIFyMHiGWUz61NVz7s';
 const ADMIN_PASSWORD = 'nailsbyrey2025';
@@ -733,27 +765,86 @@ const PLACEHOLDER_ITEMS = [
   { id:'p6', tag:'others', label:'Abstract Art', emoji:'🎨', bg:'#e8f4fd', isPlaceholder:true },
 ];
 
-function loadGalleryPhotos() { try { return JSON.parse(localStorage.getItem('nbr_gallery') || '[]'); } catch { return []; } }
-function saveGalleryPhotos(photos) { localStorage.setItem('nbr_gallery', JSON.stringify(photos)); }
+// ═══════════════════════════════════════════
+//  GALLERY — ImgBB Cloud Upload (Fix 8)
+// ═══════════════════════════════════════════
+const IMGBB_API_KEY = 'ee8cadb535db992cb5cd149c81eedf20'; // ← replace this after setup
+const GALLERY_SHEET = 'Gallery'; // sheet tab name in your Google Sheet
+
+function loadGalleryPhotos() {
+  try { return JSON.parse(localStorage.getItem('nbr_gallery') || '[]'); } catch { return []; }
+}
+function saveGalleryPhotosLocal(photos) {
+  try { localStorage.setItem('nbr_gallery', JSON.stringify(photos)); } catch(e) {}
+}
+
+async function uploadToImgBB(base64data) {
+  if (IMGBB_API_KEY === 'YOUR_IMGBB_API_KEY') {
+    // fallback to localStorage if key not set yet
+    return null;
+  }
+  const formData = new FormData();
+  // strip data:image/...;base64, prefix
+  formData.append('image', base64data.split(',')[1]);
+  const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+    method: 'POST', body: formData
+  });
+  const json = await res.json();
+  if (json.success) return json.data.url;
+  throw new Error(json.error?.message || 'ImgBB upload failed');
+}
+
+async function savePhotoToSheet(label, tag, imageUrl) {
+  const photoRecord = { label, tag, url: imageUrl, id: 'u' + Date.now() };
+  await fetch(APPS_SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'addGallery', data: photoRecord })
+  }).catch(() => {});
+  return photoRecord;
+}
+
+async function loadGalleryFromSheet() {
+  try {
+    const range = `${GALLERY_SHEET}!A:D`;
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`;
+    const res = await fetch(url);
+    const json = await res.json();
+    if (!json.values || json.values.length < 2) return [];
+    const [headers, ...rows] = json.values;
+    const h = headers.map(x => x.toLowerCase());
+    return rows.map(row => h.reduce((o, k, i) => { o[k] = row[i] || ''; return o; }, {}));
+  } catch { return []; }
+}
 
 let currentGalleryTag = '3d-arts';
-function renderGallery(tag = currentGalleryTag) {
+async function renderGallery(tag = currentGalleryTag) {
   currentGalleryTag = tag;
   const grid = document.getElementById('galleryGrid');
-  const uploaded = loadGalleryPhotos();
+  grid.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;">Loading gallery...</div>';
+
+  let uploaded = [];
+  if (IMGBB_API_KEY !== 'YOUR_IMGBB_API_KEY') {
+    uploaded = await loadGalleryFromSheet();
+  } else {
+    uploaded = loadGalleryPhotos(); // localStorage fallback
+  }
+
   const combined = [...uploaded, ...PLACEHOLDER_ITEMS];
   const items = combined.filter(i => i.tag === tag);
-  grid.innerHTML = items.map(i => i.isPlaceholder ? `
-    <div class="gallery-item" style="background:${i.bg}">
-      <div class="gallery-item-inner"><div class="gallery-nail-art">${i.emoji}</div><div class="gallery-tag">${i.tag}</div></div>
-      <div class="gallery-overlay"><div class="gallery-overlay-title">${i.label}</div><div class="gallery-overlay-tag">${i.tag}</div></div>
-    </div>
-  ` : `
-    <div class="gallery-item">
-      <img src="${i.dataUrl}" alt="${i.label}" style="width:100%;height:100%;object-fit:cover;">
-      <div class="gallery-overlay"><div class="gallery-overlay-title">${i.label}</div><div class="gallery-overlay-tag">${i.tag}</div></div>
-    </div>
-  `).join('');
+  grid.innerHTML = items.length === 0
+    ? '<div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;">No photos in this category yet.</div>'
+    : items.map(i => i.isPlaceholder ? `
+      <div class="gallery-item" style="background:${i.bg}">
+        <div class="gallery-item-inner"><div class="gallery-nail-art">${i.emoji}</div><div class="gallery-tag">${i.tag}</div></div>
+        <div class="gallery-overlay"><div class="gallery-overlay-title">${i.label}</div><div class="gallery-overlay-tag">${i.tag}</div></div>
+      </div>
+    ` : `
+      <div class="gallery-item">
+        <img src="${i.url || i.dataUrl}" alt="${i.label}" style="width:100%;height:100%;object-fit:cover;">
+        <div class="gallery-overlay"><div class="gallery-overlay-title">${i.label}</div><div class="gallery-overlay-tag">${i.tag}</div></div>
+      </div>
+    `).join('');
 }
 
 document.getElementById('galleryTabs').addEventListener('click', e => {
@@ -782,18 +873,48 @@ function loadNextPending() {
   };
   reader.readAsDataURL(file);
 }
-function savePhoto() {
+async function savePhoto() {
   const title = document.getElementById('photoTitle').value.trim() || 'Untitled';
   const tag = document.getElementById('photoTag').value;
   const dataUrl = document.getElementById('uploadPreview')._dataUrl;
   if (!dataUrl) return;
-  const photos = loadGalleryPhotos();
-  photos.unshift({ id:'u'+Date.now(), label:title, tag, dataUrl });
-  saveGalleryPhotos(photos);
-  pendingIndex++;
-  if (pendingIndex < pendingFiles.length) { loadNextPending(); showToast(`Saved! ${pendingFiles.length - pendingIndex} more to go.`); }
-  else { cancelUpload(); showToast('Photo added ✦'); }
-  renderGallery(); renderGalleryManager(); updateAdminStats();
+
+  const btn = document.querySelector('#uploadMeta .admin-add-btn');
+  btn.textContent = 'Uploading...';
+  btn.disabled = true;
+
+  try {
+    let imageUrl = null;
+
+    if (IMGBB_API_KEY !== 'YOUR_IMGBB_API_KEY') {
+      // Upload to ImgBB cloud
+      imageUrl = await uploadToImgBB(dataUrl);
+      await savePhotoToSheet(title, tag, imageUrl);
+      showToast('Photo uploaded to cloud ✦');
+    } else {
+      // Fallback: save locally
+      const photos = loadGalleryPhotos();
+      photos.unshift({ id: 'u' + Date.now(), label: title, tag, dataUrl, url: dataUrl });
+      saveGalleryPhotosLocal(photos);
+      showToast('Saved locally (set ImgBB key for cloud sync) ✦');
+    }
+
+    pendingIndex++;
+    if (pendingIndex < pendingFiles.length) {
+      loadNextPending();
+    } else {
+      cancelUpload();
+    }
+    await renderGallery();
+    await renderGalleryManager();
+    updateAdminStats();
+
+  } catch(err) {
+    showToast('Upload failed: ' + err.message);
+  } finally {
+    btn.textContent = 'Upload';
+    btn.disabled = false;
+  }
 }
 function cancelUpload() {
   pendingFiles = []; pendingIndex = 0;
@@ -804,53 +925,162 @@ function cancelUpload() {
   document.getElementById('photoInput').value = '';
 }
 function deletePhoto(id) {
-  saveGalleryPhotos(loadGalleryPhotos().filter(p => p.id !== id));
+  // Remove from localStorage
+  saveGalleryPhotosLocal(loadGalleryPhotos().filter(p => p.id !== id));
+  // Also notify Apps Script to remove from sheet
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'deleteGallery', id })
+  }).catch(() => {});
   renderGallery(); renderGalleryManager(); updateAdminStats();
   showToast('Photo removed');
 }
 function clearAllPhotos() {
-  if (!confirm('Remove all uploaded photos?')) return;
-  saveGalleryPhotos([]);
+  if (!confirm('Remove all uploaded photos? This cannot be undone.')) return;
+  saveGalleryPhotosLocal([]);
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'clearGallery' })
+  }).catch(() => {});
   renderGallery(); renderGalleryManager(); updateAdminStats();
   showToast('Gallery cleared');
 }
-function renderGalleryManager() {
-  const photos = loadGalleryPhotos();
-  document.getElementById('galleryMgrCount').textContent = `${photos.length} uploaded photo${photos.length!==1?'s':''}`;
+
+async function renderGalleryManager() {
   const grid = document.getElementById('galleryMgrGrid');
+  const countEl = document.getElementById('galleryMgrCount');
   if (!grid) return;
-  if (!photos.length) { grid.innerHTML = '<div class="gallery-mgr-empty">No photos uploaded yet.</div>'; return; }
+
+  grid.innerHTML = '<div class="gallery-mgr-empty">Loading...</div>';
+
+  let photos = [];
+  if (IMGBB_API_KEY !== 'YOUR_IMGBB_API_KEY') {
+    photos = await loadGalleryFromSheet();
+  } else {
+    photos = loadGalleryPhotos();
+  }
+
+  countEl.textContent = `${photos.length} uploaded photo${photos.length !== 1 ? 's' : ''}`;
+  document.getElementById('stat-photos') && (document.getElementById('stat-photos').textContent = photos.length);
+
+  if (!photos.length) {
+    grid.innerHTML = '<div class="gallery-mgr-empty">No photos uploaded yet. Use the upload zone above.</div>';
+    return;
+  }
   grid.innerHTML = photos.map(p => `
     <div class="gallery-mgr-item">
-      <img src="${p.dataUrl}" alt="${p.label}"><div class="gallery-mgr-info"><div class="gallery-mgr-name">${p.label}</div><div class="gallery-mgr-tag">${p.tag}</div></div>
+      <img src="${p.url || p.dataUrl}" alt="${p.label}">
+      <div class="gallery-mgr-info">
+        <div class="gallery-mgr-name">${p.label}</div>
+        <div class="gallery-mgr-tag">${p.tag}</div>
+      </div>
       <button class="gallery-mgr-del" onclick="deletePhoto('${p.id}')">✕</button>
     </div>
   `).join('');
 }
 
 // ═══════════════════════════════════════════
-//  TIME OPTIONS (weekday vs weekend)
+//  MULTI-SELECT DROPDOWN (Fix 2)
 // ═══════════════════════════════════════════
+function toggleServiceDrop() {
+  document.getElementById('serviceOptions').classList.toggle('open');
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('#serviceDropWrap')) {
+    document.getElementById('serviceOptions')?.classList.remove('open');
+  }
+});
+function updateServiceDisplay() {
+  const checked = Array.from(document.querySelectorAll('#serviceOptions input:checked')).map(c => c.value);
+  const display = document.getElementById('serviceDisplayText');
+  display.textContent = checked.length ? checked.join(', ') : 'Select service(s)...';
+  display.style.color = checked.length ? 'var(--ink)' : 'var(--muted)';
+}
+document.addEventListener('change', e => {
+  if (e.target.closest('#serviceOptions')) updateServiceDisplay();
+});
+
+// ═══════════════════════════════════════════
+//  TIME OPTIONS WITH SLOT BLOCKING (Fix 3)
+// ═══════════════════════════════════════════
+function timeToMinutes(t) {
+  if (!t) return -1;
+  // Handle both "2:00 PM" and "14:00" formats
+  t = t.trim();
+  if (t.includes(':') && !t.includes('AM') && !t.includes('PM')) {
+    // 24hr format like "14:00" or "15:00"
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+  }
+  const [time, ampm] = t.split(' ');
+  let [h, m] = time.split(':').map(Number);
+  if (ampm === 'PM' && h !== 12) h += 12;
+  if (ampm === 'AM' && h === 12) h = 0;
+  return h * 60 + m;
+}
+
 function updateTimeOptions() {
   const dateInput = document.getElementById('bdate');
   const timeSelect = document.getElementById('btime');
-  if (!dateInput.value) { timeSelect.innerHTML = ''; return; }
-  const day = new Date(dateInput.value + 'T00:00:00').getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
-  timeSelect.innerHTML = '';
-  if (day >= 1 && day <= 5) { // Mon-Fri (weekday)
-    ['8:00 PM', '8:30 PM', '9:00 PM'].forEach(t => {
-      const opt = document.createElement('option'); opt.value = t; opt.textContent = t; timeSelect.appendChild(opt);
-    });
-  } else { // Sat-Sun (weekend)
+  if (!dateInput.value) { timeSelect.innerHTML = '<option value="">Select date first</option>'; return; }
+
+  const selectedDate = dateInput.value;
+  const day = new Date(selectedDate + 'T00:00:00').getDay();
+  const nowDate = new Date();
+  const isToday = selectedDate === nowDate.toISOString().split('T')[0];
+  const nowMins = isToday ? nowDate.getHours() * 60 + nowDate.getMinutes() : -1;
+
+  // Build time slots
+  let slots = [];
+  if (day >= 1 && day <= 5) {
+    slots = ['8:00 PM', '8:30 PM', '9:00 PM'];
+  } else {
     for (let h = 11; h <= 18; h++) {
       for (let m = 0; m <= 30; m += 30) {
         if (h === 18 && m === 30) break;
         const hour = h > 12 ? h - 12 : h;
         const ampm = h >= 12 ? 'PM' : 'AM';
-        const time = `${hour}:${m.toString().padStart(2,'0')} ${ampm}`;
-        const opt = document.createElement('option'); opt.value = time; opt.textContent = time; timeSelect.appendChild(opt);
+        slots.push(`${hour}:${String(m).padStart(2,'0')} ${ampm}`);
       }
     }
+  }
+
+  // Find blocked minutes — active bookings (pending/confirmed) on this date
+  const activeOnDate = bookings.filter(b =>
+    b.date === selectedDate && (b.status === 'pending' || b.status === 'confirmed')
+  );
+  const blockedRanges = activeOnDate.map(b => {
+    const start = timeToMinutes(b.time);
+    return { start: start - 120, end: start + 120 }; // ±2hr buffer
+  });
+
+  timeSelect.innerHTML = '';
+  let hasAvailable = false;
+  slots.forEach(slot => {
+    const slotMins = timeToMinutes(slot);
+    const isPast = isToday && slotMins <= nowMins + 30; // block current + 30min buffer for today
+    const isBlocked = blockedRanges.some(r => slotMins > r.start && slotMins < r.end);
+    const opt = document.createElement('option');
+    opt.value = slot;
+    if (isPast || isBlocked) {
+      opt.textContent = slot + (isBlocked ? ' — Unavailable' : ' — Past');
+      opt.disabled = true;
+      opt.style.color = '#aaa';
+    } else {
+      opt.textContent = slot;
+      hasAvailable = true;
+    }
+    timeSelect.appendChild(opt);
+  });
+
+  if (!hasAvailable) {
+    timeSelect.innerHTML = '<option value="" disabled selected>No slots available this day</option>';
+  } else {
+    // Auto-select first available
+    const firstAvail = Array.from(timeSelect.options).find(o => !o.disabled);
+    if (firstAvail) firstAvail.selected = true;
   }
 }
 
@@ -862,12 +1092,25 @@ function getFullPhone() {
   return '+60' + digits;
 }
 
+function resetBookingForm() {
+  document.getElementById('bookingForm').style.display = 'block';
+  document.getElementById('bookingSuccess').style.display = 'none';
+  document.getElementById('fname').value = '';
+  document.getElementById('lname').value = '';
+  document.getElementById('phone').value = '';
+  document.getElementById('bdate').value = '';
+  document.getElementById('btime').innerHTML = '<option value="">Select date first</option>';
+  document.getElementById('notes').value = '';
+  document.querySelectorAll('#serviceOptions input').forEach(cb => cb.checked = false);
+  updateServiceDisplay();
+}
+
 function submitBooking() {
   const fname = document.getElementById('fname').value.trim();
   const rawPhone = document.getElementById('phone').value.trim();
   if (!fname || !rawPhone) { showToast('Please fill in all required fields ✦'); return; }
   const phone = getFullPhone();
-  const selectedServices = Array.from(document.querySelectorAll('#serviceCheckboxes input:checked')).map(cb => cb.value);
+  const selectedServices = Array.from(document.querySelectorAll('#serviceOptions input:checked')).map(cb => cb.value);
   if (selectedServices.length === 0) { showToast('Please select at least one service ✦'); return; }
   const service = selectedServices.join(', ');
   const bdate = document.getElementById('bdate').value;
@@ -951,9 +1194,12 @@ function renderBookingsTable(filter = '', page = 1) {
       <td><span class="status-badge status-${b.status}">${b.status}</span></td>
       <td>${b.finalPrice ? 'RM ' + b.finalPrice : '—'}</td>
       <td>
-        <button class="admin-action" onclick="editBooking(${b.id})">Edit</button>
-        <button class="admin-action" onclick="deleteBooking(${b.id})">Delete</button>
-        ${b.status === 'confirmed' ? `<button class="admin-action" onclick="notifyWA(${b.id})">Notify</button>` : ''}
+        <button class="admin-action" onclick="editBooking('${b.id}')">Edit</button>
+        <button class="admin-action" onclick="deleteBooking('${b.id}')">Delete</button>
+        ${b.status === 'pending' ? `<button class="admin-action" onclick="updateStatus('${b.id}','confirmed')">Confirm</button>` : ''}
+        ${b.status === 'confirmed' ? `<button class="admin-action" onclick="updateStatus('${b.id}','completed')">Complete</button>` : ''}
+        ${(b.status === 'pending' || b.status === 'confirmed') ? `<button class="admin-action" onclick="updateStatus('${b.id}','cancelled')">Cancel</button>` : ''}
+        ${b.status === 'confirmed' ? `<button class="admin-action" onclick="notifyWA('${b.id}')">Notify</button>` : ''}
       </td>
     </tr>
   `).join('');
@@ -975,13 +1221,14 @@ function renderCustomersTable(filter = '', page = 1) {
   const map = {};
   bookings.forEach(b => {
     if (b.status !== 'completed') return;
-    const key = b.phone;
+    // Fix 7: composite key = phone + full name to avoid merging different people with same number
+    const key = `${b.phone}__${(b.fname||'').toLowerCase().trim()}__${(b.lname||'').toLowerCase().trim()}`;
     if (!map[key]) {
-      map[key] = { name: `${b.fname} ${b.lname}`, phone: b.phone, visits: 0, last: '', spent: 0 };
+      map[key] = { name: `${b.fname} ${b.lname}`.trim(), phone: b.phone, visits: 0, last: '', spent: 0 };
     }
     map[key].visits++;
     if (!map[key].last || b.date > map[key].last) map[key].last = b.service;
-    if (b.finalPrice) map[key].spent += b.finalPrice;
+    if (b.finalPrice) map[key].spent += parseFloat(b.finalPrice) || 0;
   });
   let customers = Object.values(map);
   if (filter) {
@@ -1014,13 +1261,36 @@ function renderCustomersTable(filter = '', page = 1) {
   }
 }
 
+function updateStatus(id, newStatus) {
+  const b = bookings.find(b => String(b.id) === String(id));
+  if (!b) return showToast('Booking not found');
+  let finalPrice = b.finalPrice || null;
+  if (newStatus === 'completed') {
+    const price = prompt('Enter final price (RM):', b.finalPrice || '');
+    if (price === null) return;
+    finalPrice = parseFloat(price);
+    if (isNaN(finalPrice)) return showToast('Invalid price');
+  }
+  b.status = newStatus;
+  if (finalPrice !== null) b.finalPrice = finalPrice;
+  // Push update to Apps Script
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'updateStatus', id: String(id), status: newStatus, finalPrice: finalPrice || '' })
+  }).catch(() => {}); // no-cors so response is opaque, errors silently
+  saveAllData();
+  updateAllViews();
+  showToast(`Booking marked as ${newStatus} ✦`);
+}
+
 function editBooking(id) {
-  const b = bookings.find(b => b.id === id);
+  const b = bookings.find(b => String(b.id) === String(id));
   if (!b) return;
   const newName = prompt('Full name:', `${b.fname} ${b.lname}`) || `${b.fname} ${b.lname}`;
   const [fname, ...lname] = newName.split(' ');
-  b.fname = fname;
-  b.lname = lname.join(' ') || '';
+  b.fname = fname; b.lname = lname.join(' ') || '';
   b.service = prompt('Service:', b.service) || b.service;
   b.date = prompt('Date (YYYY-MM-DD):', b.date) || b.date;
   b.time = prompt('Time:', b.time) || b.time;
@@ -1030,21 +1300,27 @@ function editBooking(id) {
     const price = parseFloat(prompt('Final price (RM):', b.finalPrice || ''));
     if (!isNaN(price)) b.finalPrice = price;
   }
-  saveAllData();
-  updateAllViews();
-  showToast('Booking updated ✦');
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'updateBooking', data: b })
+  }).catch(() => {});
+  saveAllData(); updateAllViews(); showToast('Booking updated ✦');
 }
 
 function deleteBooking(id) {
   if (!confirm('Delete this booking?')) return;
-  bookings = bookings.filter(b => b.id !== id);
-  saveAllData();
-  updateAllViews();
-  showToast('Booking deleted ✦');
+  bookings = bookings.filter(b => String(b.id) !== String(id));
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'deleteBooking', id: String(id) })
+  }).catch(() => {});
+  saveAllData(); updateAllViews(); showToast('Booking deleted ✦');
 }
 
 function notifyWA(id) {
-  const b = bookings.find(b => b.id === id);
+  const b = bookings.find(b => String(b.id) === String(id));
   if (!b) return;
   const msg = encodeURIComponent(`Hi ${b.fname}! ✨ Your appointment with Nails by Rey is confirmed for ${b.date} at ${b.time}. Service: ${b.service}. See you soon! — Rey 💅`);
   window.open(`https://wa.me/${b.phone.replace(/\D/g,'')}?text=${msg}`, '_blank');
@@ -1112,16 +1388,28 @@ function checkAdminPw() {
     document.getElementById('adminDash').style.display = 'block';
     sessionStorage.setItem('nbrAdmin', '1');
     updateAllViews();
-    renderDiscountsTable(); // not used, but kept for safety
     renderGalleryManager();
   } else {
     document.getElementById('gateError').style.display = 'block';
+    document.getElementById('adminPwInput').value = '';
   }
 }
 function logoutAdmin() {
   sessionStorage.removeItem('nbrAdmin');
   document.getElementById('adminGate').style.display = 'block';
   document.getElementById('adminDash').style.display = 'none';
+  // Hide the admin section and nav link again
+  document.getElementById('admin').style.display = 'none';
+  document.getElementById('adminNavItem').style.display = 'none';
+  window.location.hash = '';
+}
+
+function revealAdminSection() {
+  document.getElementById('admin').style.display = '';
+  document.getElementById('adminNavItem').style.display = '';
+  setTimeout(() => {
+    document.getElementById('admin').scrollIntoView({ behavior: 'smooth' });
+  }, 100);
 }
 
 // SCROLL REVEAL & SCROLLSPY
@@ -1154,8 +1442,17 @@ function logoutAdmin() {
   renderGallery();
   updateAllViews();
   document.getElementById('bdate').min = new Date().toISOString().split('T')[0];
+  document.getElementById('btime').innerHTML = '<option value="">Select date first</option>';
 
-  if (sessionStorage.getItem('nbrAdmin')) {
+  // Fix 5: Admin section only revealed via secret hash #admin-access or ?admin
+  // OR if session already authenticated
+  const isAdminRoute = window.location.hash === '#admin-access' || window.location.search.includes('admin');
+  const isSessionAdmin = sessionStorage.getItem('nbrAdmin');
+
+  if (isAdminRoute || isSessionAdmin) {
+    revealAdminSection();
+  }
+  if (isSessionAdmin) {
     document.getElementById('adminGate').style.display = 'none';
     document.getElementById('adminDash').style.display = 'block';
     renderGalleryManager();
