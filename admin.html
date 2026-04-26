@@ -447,7 +447,7 @@ function notifyWA(id) {
   const b = bookings.find(b=>b.id===id);
   if (!b) return;
   const msg=encodeURIComponent(
-    `Hi ${b.fname}!\n\nYour appointment with Nails by Rey is confirmed for ${b.date} at ${b.time}.\nService: ${b.service}.\nLocation: Unit A-18-3A (https://share.google/7JEGGSGxxBMlOVL1J)\n\nSee you soon! — Rey`
+    `Hi ${b.fname}!\n\nYour appointment with Nails by Rey is confirmed for ${b.date} at ${b.time}.\nService: ${b.service}.\nLocation: Unit A-18-3A (https://maps.app.goo.gl/pKYsayT8kuYmVUCH9?g_st=iw)\n\nSee you soon! — Rey`
   );
   window.open(`https://wa.me/${b.phone.replace(/\D/g,'')}?text=${msg}`, '_blank');
 }
