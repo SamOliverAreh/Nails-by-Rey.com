@@ -7,155 +7,157 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --rose: #f2c4ce; --rose-deep: #c97d8e; --rose-dark: #7a3a4a;
-    --cream: #fdf6f0; --blush: #faeaea; --gold: #c9a96e; --gold-light: #f0e4ca;
-    --ink: #2a1f1f; --muted: #7a6a6a; --white: #ffffff;
-    --card-border: rgba(201,169,110,0.25); --shadow: 0 4px 30px rgba(42,31,31,0.08);
+    --rose:#f2c4ce; --rose-deep:#c97d8e; --rose-dark:#7a3a4a;
+    --cream:#fdf6f0; --blush:#faeaea; --gold:#c9a96e; --gold-light:#f0e4ca;
+    --ink:#2a1f1f; --muted:#7a6a6a; --white:#ffffff;
+    --card-border:rgba(201,169,110,0.25); --shadow:0 4px 30px rgba(42,31,31,0.08);
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
 
   /* SCROLL REVEAL */
-  .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
-  .reveal.reveal-left  { transform:translateX(-40px); }
-  .reveal.reveal-right { transform:translateX(40px); }
-  .reveal.visible { opacity:1; transform:translateY(0) translateX(0) scale(1); }
-  .reveal-delay-1{transition-delay:0.1s} .reveal-delay-2{transition-delay:0.2s}
-  .reveal-delay-3{transition-delay:0.3s} .reveal-delay-4{transition-delay:0.4s}
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1);}
+  .reveal.reveal-left{transform:translateX(-40px);}
+  .reveal.reveal-right{transform:translateX(40px);}
+  .reveal.visible{opacity:1;transform:translateY(0) translateX(0);}
+  .reveal-delay-1{transition-delay:0.1s}.reveal-delay-2{transition-delay:0.2s}
+  .reveal-delay-3{transition-delay:0.3s}.reveal-delay-4{transition-delay:0.4s}
 
   /* NAV */
-  nav { position:fixed; top:0; width:100%; z-index:100; background:rgba(253,246,240,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--card-border); display:flex; align-items:center; justify-content:space-between; padding:0 3rem; height:64px; transition:height 0.3s,box-shadow 0.3s,background 0.3s; }
-  nav.scrolled { height:52px; box-shadow:0 2px 20px rgba(42,31,31,0.08); background:rgba(253,246,240,0.97); }
-  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; letter-spacing:0.05em; color:var(--rose-dark); }
-  .nav-logo a { color:inherit; text-decoration:none; }
-  .nav-logo span { color:var(--gold); font-style:italic; }
-  .nav-links { display:flex; gap:2rem; list-style:none; }
-  .nav-links a { font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; position:relative; }
-  .nav-links a:hover, .nav-links a.active { color:var(--rose-dark); }
-  .nav-links a.active::after { content:''; position:absolute; bottom:-4px; left:0; width:100%; height:2px; background:var(--rose-dark); }
-  .nav-book { background:var(--rose-dark) !important; color:white !important; padding:0.45rem 1.2rem; border-radius:2rem; font-size:0.78rem !important; }
-  .nav-book:hover { background:var(--rose-deep) !important; }
-  .hamburger { display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--rose-dark); padding:0.5rem; z-index:101; }
+  nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(253,246,240,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:64px;transition:height 0.3s,box-shadow 0.3s,background 0.3s;}
+  nav.scrolled{height:52px;box-shadow:0 2px 20px rgba(42,31,31,0.08);background:rgba(253,246,240,0.97);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.05em;color:var(--rose-dark);}
+  .nav-logo a{color:inherit;text-decoration:none;}
+  .nav-logo span{color:var(--gold);font-style:italic;}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;position:relative;}
+  .nav-links a:hover,.nav-links a.active{color:var(--rose-dark);}
+  .nav-links a.active::after{content:'';position:absolute;bottom:-4px;left:0;width:100%;height:2px;background:var(--rose-dark);}
+  .nav-book{background:var(--rose-dark)!important;color:white!important;padding:0.45rem 1.2rem;border-radius:2rem;font-size:0.78rem!important;}
+  .nav-book:hover{background:var(--rose-deep)!important;}
+  .hamburger{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--rose-dark);padding:0.5rem;z-index:101;}
 
   /* HERO */
-  .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:120px 2rem 4rem; background:linear-gradient(160deg,var(--cream) 60%,var(--blush) 100%); position:relative; overflow:hidden; }
-  .hero::before { content:''; position:absolute; top:-80px; right:-80px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,rgba(242,196,206,0.35) 0%,transparent 70%); }
-  .hero::after  { content:''; position:absolute; bottom:-60px; left:-60px; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle,rgba(201,169,110,0.2) 0%,transparent 70%); }
-  .hero-badge { display:inline-block; font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold-light); padding:0.3rem 1rem; border-radius:2rem; margin-bottom:1.5rem; }
-  .hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(3.2rem,8vw,6.5rem); font-weight:300; line-height:1.05; color:var(--rose-dark); margin-bottom:0.3rem; }
-  .hero h1 em { font-style:italic; color:var(--gold); }
-  .hero-sub { font-size:1rem; color:var(--muted); margin:1.2rem auto 2.4rem; max-width:380px; line-height:1.7; }
-  .btn { display:inline-block; padding:0.85rem 2.2rem; border-radius:2rem; font-size:0.88rem; letter-spacing:0.06em; text-decoration:none; cursor:pointer; border:none; font-family:'DM Sans',sans-serif; transition:all 0.2s; }
-  .btn-primary { background:var(--rose-dark); color:white; }
-  .btn-primary:hover { background:var(--rose-deep); transform:translateY(-1px); }
-  .btn-outline { border:1px solid var(--rose-dark); color:var(--rose-dark); background:transparent; }
-  .btn-outline:hover { background:var(--rose-dark); color:white; transform:translateY(-1px); }
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 2rem 4rem;background:linear-gradient(160deg,var(--cream) 60%,var(--blush) 100%);position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(242,196,206,0.35) 0%,transparent 70%);}
+  .hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,0.2) 0%,transparent 70%);}
+  .hero-badge{display:inline-block;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-light);padding:0.3rem 1rem;border-radius:2rem;margin-bottom:1.5rem;}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,8vw,6.5rem);font-weight:300;line-height:1.05;color:var(--rose-dark);margin-bottom:0.3rem;}
+  .hero h1 em{font-style:italic;color:var(--gold);}
+  .hero-sub{font-size:1rem;color:var(--muted);margin:1.2rem auto 2.4rem;max-width:380px;line-height:1.7;}
+  .btn{display:inline-block;padding:0.85rem 2.2rem;border-radius:2rem;font-size:0.88rem;letter-spacing:0.06em;text-decoration:none;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+  .btn-primary{background:var(--rose-dark);color:white;}
+  .btn-primary:hover{background:var(--rose-deep);transform:translateY(-1px);}
+  .btn-outline{border:1px solid var(--rose-dark);color:var(--rose-dark);background:transparent;}
+  .btn-outline:hover{background:var(--rose-dark);color:white;transform:translateY(-1px);}
 
   /* SOCIAL STRIP */
-  .socials-strip { background:var(--rose-dark); padding:1rem 3rem; display:flex; align-items:center; justify-content:center; gap:2rem; flex-wrap:wrap; }
-  .socials-strip a { display:flex; align-items:center; gap:0.5rem; color:rgba(255,255,255,0.85); text-decoration:none; font-size:0.82rem; transition:color 0.2s; }
-  .socials-strip a:hover { color:var(--gold-light); }
-  .social-icon { width:28px; height:28px; background:rgba(255,255,255,0.12); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; }
+  .socials-strip{background:var(--rose-dark);padding:1rem 3rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;}
+  .socials-strip a{display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.82rem;transition:color 0.2s;}
+  .socials-strip a:hover{color:var(--gold-light);}
+  .social-icon{width:28px;height:28px;background:rgba(255,255,255,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;}
 
   /* SECTIONS */
-  section { padding:5rem 2rem; }
-  .section-label { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:0.6rem; }
-  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:300; color:var(--rose-dark); margin-bottom:0.5rem; }
-  .section-desc { color:var(--muted); font-size:0.95rem; line-height:1.7; max-width:460px; }
-  .section-header { text-align:center; margin-bottom:3.5rem; }
-  .section-header .section-desc { margin:0 auto; }
-  .container { max-width:1100px; margin:0 auto; }
+  section{padding:5rem 2rem;}
+  .section-label{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--rose-dark);margin-bottom:0.5rem;}
+  .section-desc{color:var(--muted);font-size:0.95rem;line-height:1.7;max-width:460px;}
+  .section-header{text-align:center;margin-bottom:3.5rem;}
+  .section-header .section-desc{margin:0 auto;}
+  .container{max-width:1100px;margin:0 auto;}
 
   /* GALLERY */
-  #gallery { background:var(--white); }
-  .gallery-tabs { display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap; margin-bottom:2.5rem; }
-  .gallery-tab { padding:0.5rem 1.5rem; border-radius:2rem; border:1px solid var(--card-border); background:transparent; font-size:0.82rem; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; color:var(--muted); }
-  .gallery-tab.active,.gallery-tab:hover { background:var(--rose-dark); color:white; border-color:var(--rose-dark); }
-  .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; }
-  .gallery-item { aspect-ratio:1; border-radius:12px; overflow:hidden; cursor:pointer; position:relative; background:var(--blush); }
-  .gallery-item-inner { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.4rem; transition:transform 0.3s; }
-  .gallery-item:hover .gallery-item-inner { transform:scale(1.03); }
-  .gallery-nail-art { font-size:2.5rem; }
-  .gallery-tag { font-size:0.7rem; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
-  .gallery-overlay { position:absolute; inset:0; background:rgba(122,58,74,0.75); opacity:0; transition:opacity 0.25s; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.3rem; color:white; }
-  .gallery-item:hover .gallery-overlay { opacity:1; }
-  .gallery-overlay-title { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; }
-  .gallery-overlay-tag { font-size:0.72rem; letter-spacing:0.1em; opacity:0.8; }
+  #gallery{background:var(--white);}
+  .gallery-tabs{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;}
+  .gallery-tab{padding:0.5rem 1.5rem;border-radius:2rem;border:1px solid var(--card-border);background:transparent;font-size:0.82rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;color:var(--muted);}
+  .gallery-tab.active,.gallery-tab:hover{background:var(--rose-dark);color:white;border-color:var(--rose-dark);}
+  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+  .gallery-item{aspect-ratio:1;border-radius:12px;overflow:hidden;cursor:pointer;position:relative;background:var(--blush);}
+  .gallery-item-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.4rem;transition:transform 0.3s;}
+  .gallery-item:hover .gallery-item-inner{transform:scale(1.03);}
+  .gallery-nail-art{font-size:2.5rem;}
+  .gallery-tag{font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+  .gallery-overlay{position:absolute;inset:0;background:rgba(122,58,74,0.75);opacity:0;transition:opacity 0.25s;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.3rem;color:white;}
+  .gallery-item:hover .gallery-overlay{opacity:1;}
+  .gallery-overlay-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;}
+  .gallery-overlay-tag{font-size:0.72rem;letter-spacing:0.1em;opacity:0.8;}
 
   /* PRICING */
-  #pricing { background:var(--cream); }
-  .pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; }
-  .pricing-card { background:var(--white); border:1px solid var(--card-border); border-radius:16px; padding:2rem; position:relative; transition:box-shadow 0.2s,transform 0.2s; }
-  .pricing-card:hover { box-shadow:var(--shadow); transform:translateY(-3px); }
-  .pricing-card.featured { border-color:var(--gold); border-width:1.5px; }
-  .featured-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--gold); color:white; font-size:0.7rem; letter-spacing:0.1em; padding:0.25rem 0.9rem; border-radius:2rem; white-space:nowrap; }
-  .pricing-icon { font-size:1.8rem; margin-bottom:0.8rem; }
-  .pricing-name { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:400; color:var(--rose-dark); margin-bottom:0.3rem; }
-  .pricing-desc { font-size:0.82rem; color:var(--muted); line-height:1.5; margin-bottom:1.2rem; }
-  .pricing-price { font-size:1.8rem; font-weight:300; color:var(--ink); }
-  .pricing-price span { font-size:1rem; color:var(--muted); }
-  .pricing-items { list-style:none; margin-top:1.2rem; display:flex; flex-direction:column; gap:0.5rem; }
-  .pricing-items li { font-size:0.83rem; color:var(--muted); padding-left:1.2rem; position:relative; }
-  .pricing-items li::before { content:'✦'; position:absolute; left:0; font-size:0.5rem; color:var(--gold); top:0.25rem; }
-  .pricing-divider { height:1px; background:var(--card-border); margin:1.2rem 0; }
+  #pricing{background:var(--cream);}
+  .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+  .pricing-card{background:var(--white);border:1px solid var(--card-border);border-radius:16px;padding:2rem;position:relative;transition:box-shadow 0.2s,transform 0.2s;}
+  .pricing-card:hover{box-shadow:var(--shadow);transform:translateY(-3px);}
+  .pricing-card.featured{border-color:var(--gold);border-width:1.5px;}
+  .featured-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:white;font-size:0.7rem;letter-spacing:0.1em;padding:0.25rem 0.9rem;border-radius:2rem;white-space:nowrap;}
+  .pricing-icon{font-size:1.8rem;margin-bottom:0.8rem;}
+  .pricing-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--rose-dark);margin-bottom:0.3rem;}
+  .pricing-desc{font-size:0.82rem;color:var(--muted);line-height:1.5;margin-bottom:1.2rem;}
+  .pricing-price{font-size:1.8rem;font-weight:300;color:var(--ink);}
+  .pricing-price span{font-size:1rem;color:var(--muted);}
+  .pricing-items{list-style:none;margin-top:1.2rem;display:flex;flex-direction:column;gap:0.5rem;}
+  .pricing-items li{font-size:0.83rem;color:var(--muted);padding-left:1.2rem;position:relative;}
+  .pricing-items li::before{content:'✦';position:absolute;left:0;font-size:0.5rem;color:var(--gold);top:0.25rem;}
+  .pricing-divider{height:1px;background:var(--card-border);margin:1.2rem 0;}
 
   /* BOOKING */
-  #booking { background:var(--white); }
-  .booking-wrap { display:grid; grid-template-columns:1fr 1.2fr; gap:3rem; align-items:start; }
-  .booking-info h3 { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; color:var(--rose-dark); margin-bottom:1rem; }
-  .booking-info p { font-size:0.9rem; color:var(--muted); line-height:1.7; margin-bottom:1.5rem; }
-  .booking-steps { display:flex; flex-direction:column; gap:1rem; }
-  .booking-step { display:flex; align-items:flex-start; gap:0.8rem; }
-  .step-num { width:26px; height:26px; border-radius:50%; background:var(--rose-dark); color:white; font-size:0.72rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:0.15rem; }
-  .step-text { font-size:0.85rem; color:var(--muted); line-height:1.5; }
-  .step-text strong { color:var(--ink); font-weight:500; display:block; margin-bottom:0.1rem; }
-  .booking-form { background:var(--cream); border-radius:16px; padding:2rem; border:1px solid var(--card-border); }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-  .form-group { margin-bottom:1.1rem; }
-  .form-group label { display:block; font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:0.4rem; }
-  .form-group input, .form-group select, .form-group textarea { width:100%; padding:0.65rem 0.9rem; border:1px solid var(--card-border); border-radius:8px; font-size:0.9rem; background:var(--white); color:var(--ink); font-family:'DM Sans',sans-serif; outline:none; transition:border-color 0.2s; }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--rose-deep); }
-  .form-group textarea { resize:vertical; min-height:80px; }
-  .phone-wrap { display:flex; align-items:center; border:1px solid var(--card-border); border-radius:8px; background:var(--white); overflow:hidden; }
-  .phone-prefix { padding:0.65rem 0.75rem; font-size:0.9rem; color:var(--muted); background:var(--blush); border-right:1px solid var(--card-border); white-space:nowrap; }
-  .phone-wrap input { border:none; border-radius:0; flex:1; }
-  .phone-wrap input:focus { border:none; }
-  .form-submit { width:100%; padding:0.9rem; background:var(--rose-dark); color:white; border:none; border-radius:2rem; font-size:0.88rem; letter-spacing:0.06em; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.2s; margin-top:0.5rem; }
-  .form-submit:hover { background:var(--rose-deep); transform:translateY(-1px); }
-  .booking-success { display:none; text-align:center; padding:2rem; }
-  .booking-success .check { font-size:2.5rem; margin-bottom:1rem; }
-  .booking-success h4 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--rose-dark); margin-bottom:0.5rem; }
-  .booking-success p { font-size:0.88rem; color:var(--muted); }
+  #booking{background:var(--white);}
+  .booking-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:start;}
+  .booking-info h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--rose-dark);margin-bottom:1rem;}
+  .booking-info p{font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;}
+  .booking-steps{display:flex;flex-direction:column;gap:1rem;}
+  .booking-step{display:flex;align-items:flex-start;gap:0.8rem;}
+  .step-num{width:26px;height:26px;border-radius:50%;background:var(--rose-dark);color:white;font-size:0.72rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0.15rem;}
+  .step-text{font-size:0.85rem;color:var(--muted);line-height:1.5;}
+  .step-text strong{color:var(--ink);font-weight:500;display:block;margin-bottom:0.1rem;}
+  .booking-form{background:var(--cream);border-radius:16px;padding:2rem;border:1px solid var(--card-border);}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .form-group{margin-bottom:1.1rem;}
+  .form-group label{display:block;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+  .form-group input,.form-group select,.form-group textarea{width:100%;padding:0.65rem 0.9rem;border:1px solid var(--card-border);border-radius:8px;font-size:0.9rem;background:var(--white);color:var(--ink);font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--rose-deep);}
+  .form-group textarea{resize:vertical;min-height:80px;}
+  .phone-wrap{display:flex;align-items:center;border:1px solid var(--card-border);border-radius:8px;background:var(--white);overflow:hidden;}
+  .phone-prefix{padding:0.65rem 0.75rem;font-size:0.9rem;color:var(--muted);background:var(--blush);border-right:1px solid var(--card-border);white-space:nowrap;}
+  .phone-wrap input{border:none;border-radius:0;flex:1;}
+  .phone-wrap input:focus{border:none;}
+  .form-submit{width:100%;padding:0.9rem;background:var(--rose-dark);color:white;border:none;border-radius:2rem;font-size:0.88rem;letter-spacing:0.06em;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;margin-top:0.5rem;}
+  .form-submit:hover{background:var(--rose-deep);transform:translateY(-1px);}
+  .form-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+  .booking-success{display:none;text-align:center;padding:2rem;}
+  .booking-success .check{font-size:2.5rem;margin-bottom:1rem;}
+  .booking-success h4{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--rose-dark);margin-bottom:0.5rem;}
+  .booking-success p{font-size:0.88rem;color:var(--muted);}
 
-  /* MULTI-SELECT */
-  .multi-select-wrap { position:relative; }
-  .multi-select-display { width:100%; padding:0.65rem 0.9rem; border:1px solid var(--card-border); border-radius:8px; font-size:0.9rem; background:var(--white); color:var(--ink); font-family:'DM Sans',sans-serif; cursor:pointer; user-select:none; transition:border-color 0.2s; }
-  .multi-select-display:hover { border-color:var(--rose-deep); }
-  .multi-select-options { display:none; position:absolute; top:calc(100% + 4px); left:0; right:0; background:var(--white); border:1px solid var(--card-border); border-radius:8px; box-shadow:0 8px 24px rgba(42,31,31,0.12); z-index:50; padding:0.4rem 0; max-height:220px; overflow-y:auto; }
-  .multi-select-options.open { display:block; }
-  .multi-option { display:flex; align-items:center; gap:0.6rem; padding:0.55rem 1rem; font-size:0.88rem; color:var(--ink); cursor:pointer; transition:background 0.15s; }
-  .multi-option:hover { background:var(--blush); }
-  .multi-option input[type=checkbox] { accent-color:var(--rose-dark); width:15px; height:15px; cursor:pointer; }
+  /* MULTI-SELECT DROPDOWN */
+  .multi-select-wrap{position:relative;}
+  .multi-select-display{width:100%;padding:0.65rem 0.9rem;border:1px solid var(--card-border);border-radius:8px;font-size:0.9rem;background:var(--white);color:var(--ink);font-family:'DM Sans',sans-serif;cursor:pointer;user-select:none;transition:border-color 0.2s;}
+  .multi-select-display:hover{border-color:var(--rose-deep);}
+  .multi-select-options{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--white);border:1px solid var(--card-border);border-radius:8px;box-shadow:0 8px 24px rgba(42,31,31,0.12);z-index:50;padding:0.4rem 0;max-height:220px;overflow-y:auto;}
+  .multi-select-options.open{display:block;}
+  .multi-option{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 1rem;font-size:0.88rem;color:var(--ink);cursor:pointer;transition:background 0.15s;}
+  .multi-option:hover{background:var(--blush);}
+  .multi-option input[type=checkbox]{accent-color:var(--rose-dark);width:15px;height:15px;cursor:pointer;}
 
-  footer { background:var(--rose-dark); color:rgba(255,255,255,0.7); text-align:center; padding:2rem; font-size:0.82rem; }
-  footer a { color:var(--rose); text-decoration:none; }
-  .toast { position:fixed; bottom:2rem; right:2rem; background:var(--rose-dark); color:white; padding:0.9rem 1.5rem; border-radius:10px; font-size:0.85rem; box-shadow:0 8px 30px rgba(0,0,0,0.2); transform:translateY(80px); opacity:0; transition:all 0.3s; z-index:999; }
-  .toast.show { transform:translateY(0); opacity:1; }
+  footer{background:var(--rose-dark);color:rgba(255,255,255,0.7);text-align:center;padding:2rem;font-size:0.82rem;}
+  footer a{color:var(--rose);text-decoration:none;}
+  .toast{position:fixed;bottom:2rem;right:2rem;background:var(--rose-dark);color:white;padding:0.9rem 1.5rem;border-radius:10px;font-size:0.85rem;box-shadow:0 8px 30px rgba(0,0,0,0.2);transform:translateY(80px);opacity:0;transition:all 0.3s;z-index:999;}
+  .toast.show{transform:translateY(0);opacity:1;}
 
-  @media (max-width:768px) {
-    nav { padding:0 1.2rem; }
-    .hamburger { display:block; }
-    .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:rgba(253,246,240,0.98); backdrop-filter:blur(12px); border-bottom:1px solid var(--card-border); flex-direction:column; gap:0; padding:1rem 0; }
-    .nav-links.show { display:flex; }
-    .nav-links li { text-align:center; }
-    .nav-links a { display:block; padding:0.8rem 1rem; }
-    .booking-wrap { grid-template-columns:1fr; }
-    .form-row { grid-template-columns:1fr; }
+  @media(max-width:768px){
+    nav{padding:0 1.2rem;}
+    .hamburger{display:block;}
+    .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(253,246,240,0.98);backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);flex-direction:column;gap:0;padding:1rem 0;}
+    .nav-links.show{display:flex;}
+    .nav-links li{text-align:center;}
+    .nav-links a{display:block;padding:0.8rem 1rem;}
+    .booking-wrap{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
   }
 </style>
 </head>
 <body>
+
 <nav>
   <div class="nav-logo"><a href="#home">Nails <span>by Rey</span></a></div>
   <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
@@ -167,6 +169,7 @@
   </ul>
 </nav>
 
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-content">
     <div class="hero-badge reveal">✦ Professional Nail Artist · Kajang, Selangor</div>
@@ -179,6 +182,7 @@
   </div>
 </section>
 
+<!-- SOCIAL STRIP -->
 <div class="socials-strip">
   <a href="https://wa.me/60176445338" target="_blank"><div class="social-icon">💬</div> WhatsApp · 017-6445338</a>
   <a href="https://www.tiktok.com/@vvrffl?_r=1&_t=ZS-95o2VY5Mn0Z" target="_blank"><div class="social-icon">🎵</div> TikTok</a>
@@ -186,6 +190,7 @@
   <a href="https://share.google/7JEGGSGxxBMlOVL1J" target="_blank"><div class="social-icon">📍</div> Kajang Utama (Home-based)</a>
 </div>
 
+<!-- GALLERY -->
 <section id="gallery">
   <div class="container">
     <div class="section-header">
@@ -205,6 +210,7 @@
   </div>
 </section>
 
+<!-- PRICING -->
 <section id="pricing">
   <div class="container">
     <div class="section-header">
@@ -219,7 +225,7 @@
         <div class="pricing-desc">Safe and gentle gel removal without damaging your natural nails.</div>
         <div class="pricing-price"><span>from</span> RM 20 <span>/ session</span></div>
         <div class="pricing-divider"></div>
-        <ul class="pricing-items"><li>Gel removal</li><li>Nail care after removal</li><li>Can book with new set</li><li>Gentle on natural nails</li></ul>
+        <ul class="pricing-items"><li>Soak-off gel removal</li><li>Nail care after removal</li><li>Can book with new set</li><li>Gentle on natural nails</li></ul>
       </div>
       <div class="pricing-card reveal reveal-delay-1">
         <div class="pricing-icon">💅</div>
@@ -258,6 +264,7 @@
   </div>
 </section>
 
+<!-- BOOKING -->
 <section id="booking">
   <div class="container">
     <div class="section-header">
@@ -309,7 +316,7 @@
             <div class="form-group"><label>Preferred Time</label><select id="btime"><option value="">Select date first</option></select></div>
           </div>
           <div class="form-group"><label>Inspo Notes</label><textarea id="notes" placeholder="Share any reference, colour ideas, or special requests..."></textarea></div>
-          <button class="form-submit" onclick="submitBooking()">✦ Request Appointment</button>
+          <button class="form-submit" id="submitBtn" onclick="submitBooking()">✦ Request Appointment</button>
         </div>
         <div class="booking-success" id="bookingSuccess">
           <div class="check">🌸</div>
@@ -331,31 +338,30 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG ─────────────────────────────────────────────────
+// ── CONFIG ────────────────────────────────────────────────
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbypOt0N-RCiBowshVcdTUte-Dmn-_Iizbf5nt0ciKiozLT7e-gGFmG4iCXgNTGW4ils/exec';
 const API_KEY         = 'AIzaSyCSof22kUg19D6wdd0PYXmUPkA71x-sFhU';
 const SPREADSHEET_ID  = '1nbQzt6TzZ4fi0mt1_v4sAsOO9ZIFyMHiGWUz61NVz7s';
-const IMGBB_API_KEY   = 'ee8cadb535db992cb5cd149c81eedf20';
 const ADMIN_WA        = '60176445338';
 
-// ── BOOKING HEADERS (must match Google Sheet column order exactly) ──
+// Strict column order — must match sheet exactly, no email, no code
 const BOOKING_COLS = ['id','fname','lname','phone','service','date','time','notes','status','finalservice','finalprice'];
 
 let bookings = [];
 
-// ── READ FROM SHEET ────────────────────────────────────────
+// ── SHEET READ ────────────────────────────────────────────
 async function loadFromSheet(sheetName) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${sheetName}!A:Z?key=${API_KEY}`;
+  const url  = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${sheetName}!A:Z?key=${API_KEY}`;
   const res  = await fetch(url);
   const json = await res.json();
   if (!json.values || json.values.length < 2) return [];
   const headers = json.values[0].map(h => String(h).toLowerCase().trim());
   return json.values.slice(1).map(row =>
-    headers.reduce((obj, h, i) => { obj[h] = row[i] !== undefined ? String(row[i]) : ''; return obj; }, {})
+    headers.reduce((obj,h,i) => { obj[h] = row[i] !== undefined ? String(row[i]) : ''; return obj; }, {})
   );
 }
 
-// ── WRITE TO SHEET (single JSON fetch POST) ────────────────
+// ── SHEET WRITE ───────────────────────────────────────────
 async function postToSheet(payload) {
   try {
     await fetch(APPS_SCRIPT_URL, {
@@ -363,10 +369,27 @@ async function postToSheet(payload) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-  } catch (e) { console.warn('Sheet write failed:', e); }
+  } catch(e) { console.warn('Sheet write failed:', e); }
 }
 
-// ── INIT: load bookings from sheet ────────────────────────
+// ── GET NEXT CLEAN ID FROM APPS SCRIPT ───────────────────
+// Apps Script doGet?action=nextId returns BK001, BK016 etc.
+async function getNextId() {
+  try {
+    const res  = await fetch(APPS_SCRIPT_URL + '?action=nextId');
+    const json = await res.json();
+    if (json.ok && json.id) return json.id;
+  } catch(e) {}
+  // Fallback: derive from loaded bookings
+  let max = 0;
+  bookings.forEach(b => {
+    const n = parseInt(String(b.id).replace(/\D/g,''), 10);
+    if (!isNaN(n) && n > max) max = n;
+  });
+  return 'BK' + String(max + 1).padStart(3, '0');
+}
+
+// ── INIT: load bookings ───────────────────────────────────
 async function initData() {
   try {
     const raw = await loadFromSheet('Bookings');
@@ -379,17 +402,17 @@ async function initData() {
       date:         b.date         || '',
       time:         b.time         || '',
       notes:        b.notes        || '',
-      status:       b.status       || 'pending',
-      finalservice: b.finalservice || b.finalService || '',
-      finalprice:   b.finalprice   || b.finalPrice   || ''
+      status:       (b.status      || 'pending').toLowerCase(),
+      finalservice: b.finalservice || '',
+      finalprice:   b.finalprice   || ''
     }));
-  } catch (e) {
+  } catch(e) {
     console.warn('Could not load from sheet:', e);
     bookings = [];
   }
 }
 
-// ── GALLERY ────────────────────────────────────────────────
+// ── GALLERY ───────────────────────────────────────────────
 const PLACEHOLDER_ITEMS = [
   { id:'p1', tag:'3d-arts',     label:'3D Floral',     emoji:'🌸', bg:'#faeaea', isPlaceholder:true },
   { id:'p2', tag:'cat-eye',     label:'Cat Eye Shine', emoji:'✨', bg:'#e6f2ff', isPlaceholder:true },
@@ -414,14 +437,14 @@ let currentGalleryTag = '3d-arts';
 async function renderGallery(tag = currentGalleryTag) {
   currentGalleryTag = tag;
   const grid = document.getElementById('galleryGrid');
-  grid.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;">Loading gallery...</div>';
+  grid.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;">Loading...</div>';
   const uploaded = await loadGalleryFromSheet();
   const items = [...uploaded, ...PLACEHOLDER_ITEMS].filter(i => i.tag === tag);
   grid.innerHTML = items.length === 0
     ? '<div style="text-align:center;padding:2rem;color:var(--muted);">No photos in this category yet.</div>'
     : items.map(i => i.isPlaceholder
         ? `<div class="gallery-item" style="background:${i.bg}"><div class="gallery-item-inner"><div class="gallery-nail-art">${i.emoji}</div><div class="gallery-tag">${i.tag}</div></div><div class="gallery-overlay"><div class="gallery-overlay-title">${i.label}</div><div class="gallery-overlay-tag">${i.tag}</div></div></div>`
-        : `<div class="gallery-item"><img src="${i.url}" alt="${i.label}" style="width:100%;height:100%;object-fit:cover;"><div class="gallery-overlay"><div class="gallery-overlay-title">${i.label}</div><div class="gallery-overlay-tag">${i.tag}</div></div></div>`
+        : `<div class="gallery-item"><img src="${i.url}" alt="${i.label}" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="gallery-overlay"><div class="gallery-overlay-title">${i.label}</div><div class="gallery-overlay-tag">${i.tag}</div></div></div>`
       ).join('');
 }
 
@@ -433,7 +456,7 @@ document.getElementById('galleryTabs').addEventListener('click', e => {
   renderGallery(tab.dataset.tag);
 });
 
-// ── MULTI-SELECT SERVICE DROPDOWN ─────────────────────────
+// ── MULTI-SELECT DROPDOWN ─────────────────────────────────
 function toggleServiceDrop() { document.getElementById('serviceOptions').classList.toggle('open'); }
 document.addEventListener('click', e => { if (!e.target.closest('#serviceDropWrap')) document.getElementById('serviceOptions')?.classList.remove('open'); });
 document.addEventListener('change', e => { if (e.target.closest('#serviceOptions')) updateServiceDisplay(); });
@@ -447,35 +470,48 @@ function getSelectedServices() {
   return Array.from(document.querySelectorAll('#serviceOptions input:checked')).map(c => c.value);
 }
 
-// ── TIME SLOTS WITH 2-HR BUFFER ───────────────────────────
+// ── TIME SLOTS WITH 2-HR BUFFER & PAST BLOCKING ──────────
 function timeToMinutes(t) {
   if (!t) return -1;
   t = String(t).trim();
+  // Handle 24hr format e.g. "14:00" or "20:30"
   if (/^\d{1,2}:\d{2}$/.test(t)) { const [h,m]=t.split(':').map(Number); return h*60+m; }
-  const [time, ampm] = t.split(' ');
-  let [h, m] = time.split(':').map(Number);
+  // Handle 12hr format e.g. "2:00 PM"
+  const parts = t.split(' ');
+  const ampm  = parts[1];
+  let [h,m]   = parts[0].split(':').map(Number);
   if (ampm==='PM' && h!==12) h+=12;
   if (ampm==='AM' && h===12) h=0;
   return h*60+m;
 }
 
 function updateTimeOptions() {
-  const dateVal  = document.getElementById('bdate').value;
+  const dateVal    = document.getElementById('bdate').value;
   const timeSelect = document.getElementById('btime');
   if (!dateVal) { timeSelect.innerHTML='<option value="">Select date first</option>'; return; }
 
-  const day    = new Date(dateVal+'T00:00:00').getDay();
-  const now    = new Date();
-  const isToday = dateVal === now.toISOString().split('T')[0];
-  const nowMins = isToday ? now.getHours()*60+now.getMinutes() : -1;
+  const day      = new Date(dateVal+'T00:00:00').getDay(); // 0=Sun
+  const now      = new Date();
+  const isToday  = dateVal === now.toISOString().split('T')[0];
+  const nowMins  = isToday ? now.getHours()*60+now.getMinutes() : -1;
 
-  const slots = day>=1 && day<=5
+  // Weekday (Mon-Fri): evening slots only. Weekend: full day slots.
+  const slots = day >= 1 && day <= 5
     ? ['8:00 PM','8:30 PM','9:00 PM']
-    : (() => { const s=[]; for(let h=11;h<=18;h++) for(let m=0;m<=30;m+=30) { if(h===18&&m===30) break; const hr=h>12?h-12:h; s.push(`${hr}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`); } return s; })();
+    : (() => {
+        const s = [];
+        for (let h=11; h<=18; h++) for (let m=0; m<=30; m+=30) {
+          if (h===18 && m===30) break;
+          const hr = h>12 ? h-12 : h;
+          s.push(`${hr}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`);
+        }
+        return s;
+      })();
 
+  // Block slots within ±2hrs of any active (pending/confirmed) booking on this date
   const blocked = bookings
     .filter(b => b.date===dateVal && (b.status==='pending'||b.status==='confirmed'))
-    .map(b => { const c=timeToMinutes(b.time); return {start:c-120,end:c+120}; });
+    .map(b => { const c=timeToMinutes(b.time); return { start:c-120, end:c+120 }; });
 
   timeSelect.innerHTML = '';
   let hasAvail = false;
@@ -489,13 +525,15 @@ function updateTimeOptions() {
     else            { opt.textContent=slot; hasAvail=true; }
     timeSelect.appendChild(opt);
   });
-  if (!hasAvail) { timeSelect.innerHTML='<option value="" disabled selected>No slots available this day</option>'; }
-  else { const f=Array.from(timeSelect.options).find(o=>!o.disabled); if(f) f.selected=true; }
+  if (!hasAvail) {
+    timeSelect.innerHTML='<option value="" disabled selected>No slots available this day</option>';
+  } else {
+    const first = Array.from(timeSelect.options).find(o=>!o.disabled);
+    if (first) first.selected=true;
+  }
 }
 
-// ── BOOKING SUBMIT ─────────────────────────────────────────
-function getFullPhone() { return '+60'+document.getElementById('phone').value.replace(/\D/g,''); }
-
+// ── BOOKING SUBMIT ────────────────────────────────────────
 async function submitBooking() {
   const fname = document.getElementById('fname').value.trim();
   const phone = document.getElementById('phone').value.trim();
@@ -506,11 +544,19 @@ async function submitBooking() {
   const btime = document.getElementById('btime').value;
   if (!bdate || !btime) { showToast('Please select date and time ✦'); return; }
 
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  // Get clean sequential ID from Apps Script
+  const newId = await getNextId();
+
+  // Build booking object — STRICTLY matching BOOKING_COLS, no email, no code
   const booking = {
-    id:           'BK' + Date.now(),
-    fname,
+    id:           newId,
+    fname:        fname,
     lname:        document.getElementById('lname').value.trim(),
-    phone:        getFullPhone(),
+    phone:        '+60' + phone.replace(/\D/g,''),
     service:      services.join(', '),
     date:         bdate,
     time:         btime,
@@ -520,21 +566,29 @@ async function submitBooking() {
     finalprice:   ''
   };
 
-  // Write to Google Sheet immediately
-  await postToSheet({ type: 'addBooking', data: booking });
-  bookings.push(booking); // optimistic local update for time slot blocking
+  // Write to Google Sheet
+  await postToSheet({ type:'addBooking', data:booking });
 
-  document.getElementById('bookingForm').style.display = 'none';
+  // Optimistic local update (for time slot blocking without reload)
+  bookings.push(booking);
+
+  btn.disabled = false;
+  btn.textContent = '✦ Request Appointment';
+
+  document.getElementById('bookingForm').style.display    = 'none';
   document.getElementById('bookingSuccess').style.display = 'block';
-  document.getElementById('successMsg').textContent = `Hi ${fname}! Rey will confirm your ${booking.service} on ${bdate} at ${btime} shortly via WhatsApp. 💅`;
+  document.getElementById('successMsg').textContent =
+    `Hi ${fname}! Rey will confirm your ${booking.service} on ${bdate} at ${btime} shortly via WhatsApp. 💅`;
 
-  // Notify Rey on WhatsApp
-  const adminMsg = encodeURIComponent(`New Booking!\n\n${fname} ${booking.lname}\n${booking.service}\n${bdate} at ${btime}\nPhone: ${booking.phone}\nNotes: ${booking.notes||'—'}`);
-  window.open(`https://wa.me/${ADMIN_WA}?text=${adminMsg}`, '_blank');
+  // Auto-notify Rey via WhatsApp
+  const msg = encodeURIComponent(
+    `New Booking Request!\n\nID: ${newId}\nName: ${fname} ${booking.lname}\nPhone: ${booking.phone}\nService: ${booking.service}\nDate: ${bdate} at ${btime}\nNotes: ${booking.notes||'—'}`
+  );
+  window.open(`https://wa.me/${ADMIN_WA}?text=${msg}`, '_blank');
 }
 
 function resetBookingForm() {
-  document.getElementById('bookingForm').style.display   = 'block';
+  document.getElementById('bookingForm').style.display    = 'block';
   document.getElementById('bookingSuccess').style.display = 'none';
   ['fname','lname','phone','notes'].forEach(id => document.getElementById(id).value='');
   document.getElementById('bdate').value = '';
@@ -543,33 +597,42 @@ function resetBookingForm() {
   updateServiceDisplay();
 }
 
-// ── TOAST ──────────────────────────────────────────────────
+// ── TOAST ─────────────────────────────────────────────────
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
 }
 
-// ── SCROLL REVEAL & SCROLLSPY ──────────────────────────────
-(function() {
-  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold:0.15, rootMargin:'0px 0px -50px 0px' });
+// ── SCROLL REVEAL & NAV SCROLLSPY ────────────────────────
+(function(){
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold:0.15, rootMargin:'0px 0px -50px 0px' }
+  );
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   const links = document.querySelectorAll('.nav-links a:not(.nav-book)');
   window.addEventListener('scroll', () => {
     const y = window.pageYOffset;
     let cur = '';
     document.querySelectorAll('section[id]').forEach(s => { if(y >= s.offsetTop-100) cur=s.id; });
-    links.forEach(l => { l.classList.remove('active'); if(l.getAttribute('href')==='#'+cur) l.classList.add('active'); });
+    links.forEach(l => {
+      l.classList.remove('active');
+      if(l.getAttribute('href')==='#'+cur) l.classList.add('active');
+    });
+    document.querySelector('nav').classList.toggle('scrolled', y>50);
   }, { passive:true });
 })();
 
-// ── STARTUP ────────────────────────────────────────────────
-(async function() {
+// ── STARTUP ───────────────────────────────────────────────
+(async function(){
   await initData();
   renderGallery();
   document.getElementById('bdate').min = new Date().toISOString().split('T')[0];
-  document.getElementById('hamburgerBtn').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('show'));
-  document.querySelectorAll('#navLinks a').forEach(l => l.addEventListener('click', () => document.getElementById('navLinks').classList.remove('show')));
+  document.getElementById('hamburgerBtn').addEventListener('click', () =>
+    document.getElementById('navLinks').classList.toggle('show'));
+  document.querySelectorAll('#navLinks a').forEach(l =>
+    l.addEventListener('click', () => document.getElementById('navLinks').classList.remove('show')));
 })();
 </script>
 </body>
